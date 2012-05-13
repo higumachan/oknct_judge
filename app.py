@@ -30,7 +30,7 @@ app.logger.addHandler(error_file_handler)
 
 @app.before_request
 def before_request():
-    if (True):
+    if (DOTCLOUD):
         f = open('/home/dotcloud/environment.json');
         env = json.load(f);
         g.conn = pymongo.Connection(env["DOTCLOUD_DATA_MONGODB_HOST"], int(env["DOTCLOUD_DATA_MONGODB_PORT"]));

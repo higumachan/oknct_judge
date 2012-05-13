@@ -16,7 +16,13 @@ def file_cmp(a, b):
     return (a_string == b_string);
 
 def judge(file_name, problem_id, submit_id):
-    db = pymongo.Connection().ooj;
+    if (DOTCLOUD):
+        f = open('/home/dotcloud/environment.json');
+        env = json.load(f);
+        conn = pymongo.Connection(env["DOTCLOUD_DATA_MONGODB_HOST"], int(env["DOTCLOUD_DATA_MONGODB_PORT"]));
+        conn.admin.authenticate(env['DOTCLOUD_DATA_MONGODB_LOGIN'], env['DOTCLOUD_DATA_MONGODB_PASSWORD']);
+    else:
+        conn = pymongo.Connection();
     problem = db.problems.find_one({"_id": problem_id});
     submit = db.submits.find_one({"_id": submit_id});
     
