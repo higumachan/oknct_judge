@@ -1,3 +1,6 @@
+import sys
+sys.path.append('/home/dotcloud/current')
+
 from flask import *
 from threading import Thread
 from judge import *
