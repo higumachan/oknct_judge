@@ -26,15 +26,19 @@ def judge(file_name, problem_id, submit_id):
     res = os.system("gcc %s -o %s" % (file_name + ".c", file_name + ".out"));
     if (res == 0):
         proc = Popen(args="./%s.out" % file_name, stdin=input_file_handle, stdout=open(file_name + ".txt", "w"));
+        proc.poll();
         for i in range(10):
-            if (proc.poll() == True):
+            if (proc.poll() != None):
                 break;
             time.sleep(1);
-        if (proc.poll() != 0):
+        if (proc.poll() == None):
             proc.kill();
             submit["status"] = "InfinitLoop";
         else:
-            if (file_cmp(file_name + ".txt", answer_file) == True):
+            print proc.returncode;
+            if (proc.returncode != 0):
+                submit["status"] = "RuntimeError";
+            elif (file_cmp(file_name + ".txt", answer_file) == True):
                 submit["status"] = "Accept";
             else:
                 submit["status"] = "WA";
