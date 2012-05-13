@@ -37,7 +37,7 @@ def before_request():
         g.conn.admin.authenticate(env['DOTCLOUD_DATA_MONGODB_LOGIN'], env['DOTCLOUD_DATA_MONGODB_PASSWORD']);
     else:
         g.conn = pymongo.Connection();
-        g.db = g.conn.ooj; 
+    g.db = g.conn.ooj; 
     print "request_start";
 
 @app.teardown_request
