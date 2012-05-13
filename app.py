@@ -10,9 +10,23 @@ import os
 from settings import *
 from LoginModule import *
 import hashlib
+from logging.handlers import *
 
 app = Flask(__name__);
 app.secret_key = "A0Zr98j/3yX R~XHH!jmN]LWX/,?RT";
+
+formatter = logging.Formatter(
+    '%(asctime)s %(levelname)s: %(message)s '
+    '[in %(pathname)s:%(lineno)d]'
+)
+error_log = os.path.join(app.root_path, 'logs/error.log')
+error_file_handler = RotatingFileHandler(
+    error_log, maxBytes=100000, backupCount=10
+)    
+error_file_handler.setLevel(logging.ERROR)
+error_file_handler.setFormatter(formatter)
+app.logger.addHandler(error_file_handler)
+
 
 @app.before_request
 def before_request():
