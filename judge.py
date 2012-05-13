@@ -3,6 +3,7 @@ import os
 from subprocess import Popen
 from settings import *
 import time
+import json
 
 def file_cmp(a, b):
     a_handle = open(a);
