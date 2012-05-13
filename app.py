@@ -13,7 +13,7 @@ app.secret_key = "A0Zr98j/3yX R~XHH!jmN]LWX/,?RT";
 
 @app.before_request
 def before_request():
-    if (False):
+    if (True):
         f = open('/home/dotcloud/environment.json');
         env = json.load(f);
         g.conn = pymongo.Connection(env["DOTCLOUD_DATA_MONGODB_HOST"], int(env["DOTCLOUD_DATA_MONGODB_PORT"]));
