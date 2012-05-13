@@ -24,6 +24,7 @@ def judge(file_name, problem_id, submit_id):
         conn.admin.authenticate(env['DOTCLOUD_DATA_MONGODB_LOGIN'], env['DOTCLOUD_DATA_MONGODB_PASSWORD']);
     else:
         conn = pymongo.Connection();
+    db = conn.ooj;
     problem = db.problems.find_one({"_id": problem_id});
     submit = db.submits.find_one({"_id": submit_id});
     
