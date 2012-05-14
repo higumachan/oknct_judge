@@ -33,7 +33,7 @@ def judge(file_name, problem_id, submit_id):
 
     res = os.system("gcc %s -o %s" % (file_name + ".c", file_name + ".out"));
     if (res == 0):
-        proc = Popen(args="./%s.out" % file_name, stdin=input_file_handle, stdout=open(file_name + ".txt", "w"));
+        proc = Popen(args="../%s.out" % file_name, stdin=input_file_handle, stdout=open(file_name + ".txt", "w"), cwd="./kakikomikinsi");
         proc.poll();
         for i in range(10):
             if (proc.poll() != None):
